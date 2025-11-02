@@ -27,7 +27,7 @@ class Catcher {
 		exit;
 	}
 
-	public static function not_modified(): never { self::code(302, false); }
+	public static function not_modified(): never { self::code(304, false); }
 	public static function not_found(): never { self::code(404); }
 	public static function internal_error(): never { self::code(500); }
 }
@@ -35,7 +35,20 @@ class Catcher {
 class Router {
 	private const DEFAULT = 'root';
 	private const STREAM_BLOCKSIZE = 4096;
+	private const CONTENT_TYPES = [
+		'css' => 'text/css',
+	];
 
+	private static function sniff_mime(string $file): string {
+		$ext = pathinfo($file, PATHINFO_EXTENSION);
+		$mime = self::CONTENT_TYPES[$ext] ?? null;
+		if (!is_null($mime)) { return $mime; }
+
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		$mime = finfo_file($finfo, $file);
+		finfo_close($finfo);
+		return $mime;
+	}
 	private static function stream_asset(string $path) {
 		$file = ASSETS_DIR . $path;
 		if (!is_readable($file)) { return; }
@@ -47,11 +60,12 @@ class Router {
 		if (Request::header('IF_NONE_MATCH') === $etag) { Catcher::not_modified(); }
 
 		// Response with file metadata
-		$finfo = finfo_open(FILEINFO_MIME_TYPE);
-		$mime = finfo_file($finfo, $file);
-		finfo_close($finfo);
-		header("ETag: $etag");
+		$mime = self::sniff_mime($file);
+		$size = filesize($file);
+		header("Cache-Control: public, max-age=3600");
+		header("Content-Length: $size");
 		header("Content-Type: $mime");
+		header("ETag: $etag");
 
 		// Print file content as chunks.
 		while (!feof($fd)) {
