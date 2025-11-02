@@ -1,6 +1,6 @@
 @import "global.css";
 
-body > main {
+main {
 	width: 1200px;
 	min-width: 75%;
 	align-items: flex-start;
@@ -128,7 +128,7 @@ body > main {
 
 /* Narrow screen styling */
 @media (max-width: 1200px) {
-	#page--jobs { flex-direction: column; align-items: center; }
+	main { flex-direction: column; align-items: center; }
 	#category-navigation { position: static; transform: none; }
 }
 

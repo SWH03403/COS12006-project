@@ -1,6 +1,6 @@
 @import "global.css";
 
-body > main {
+main {
 	--padding: 20px;
 	--round: 1.5em;
 	--profile-icon-size: 70px;
@@ -21,13 +21,13 @@ body > main {
 	details[open] { padding-bottom: calc(var(--social-icon-size) + var(--spacing) * 2); }
 }
 
-#page--about > :first-child {
+main > :first-child {
 	--round: 2em;
 	background: none;
 	border: 5px solid black;
 }
 
-#page--about #company-logo { max-width: 500px; margin-bottom: 20px; }
+main #company-logo { max-width: 500px; margin-bottom: 20px; }
 
 #members-info, #members-info > :last-child { gap: var(--spacing); }
 
@@ -73,7 +73,7 @@ body > main {
 }
 
 /* Ow< */
-#page--about:has(details:not([open])) #another-box::after { display: none; }
+main #another-box::after { display: none; }
 #another-box {
 	position: relative;
 

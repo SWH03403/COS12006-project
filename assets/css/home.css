@@ -15,7 +15,6 @@ body > main {
 	gap: var(--spacing);
 	border-radius: var(--round) var(--round) 0 0;
 }
-#company-logo { display: block; max-width: 300px; } /* Preserve image ratio */
 #company-title { margin: 0; }
 
 #site-info { gap: var(--spacing); }

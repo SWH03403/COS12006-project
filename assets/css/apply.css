@@ -1,6 +1,6 @@
 @import "global.css";
 
-body > main {
+main {
 	gap: 50px;
 
 	button[type="submit"],
