@@ -1,0 +1,37 @@
+@import "global.css";
+
+body > main {
+	--round: 2em;
+
+	width: 1400px;
+	font-size: 16pt;
+
+	h1 { font-size: 32pt; }
+	h2 { font-size: 24pt; }
+	p { margin-left: 1em; }
+}
+
+#company-introduction {
+	gap: var(--spacing);
+	border-radius: var(--round) var(--round) 0 0;
+}
+#company-logo { display: block; max-width: 300px; } /* Preserve image ratio */
+#company-title { margin: 0; }
+
+#site-info { gap: var(--spacing); }
+#site-description, #site-services {
+	align-items: flex-start;
+	border-radius: 0 0 var(--round) 0;
+}
+#site-description {
+	flex-grow: 2; /* Grow by 2 times compared to other fill elements */
+	border-radius: 0 0 0 var(--round);
+}
+
+#secret {
+	position: absolute;
+	color: #cacaca;
+	top: 95%;
+	left: 95%;
+}
+#secret::after { content: "?"; font-size: 100%; }

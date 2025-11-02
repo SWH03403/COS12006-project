@@ -1,0 +1,134 @@
+@import "global.css";
+
+body > main {
+	width: 1200px;
+	min-width: 75%;
+	align-items: flex-start;
+
+	h1 {
+		z-index: 1; /* Raise header so its shadow is over the listings */
+		border-radius: .5em;
+	}
+	h2 { line-height: 1em; margin-bottom: .2em; } /* Fix high line gaps caused by Poppins font */
+
+	/* The `summary` element is used to show/hide content of the `details` element with a click.
+	 * This expands the element to exactly cover the listing box, turning the box into a button. */
+	article {
+		flex-basis: 200px;
+		flex-grow: 1;
+		max-width: 100%;
+
+		position: relative; /* Anchor */
+		padding: 20px;
+		border-radius: 1em;
+		justify-content: flex-start;
+	}
+
+	article:hover { background: #eaeaea; }
+	article:has(> details[open]) { flex-basis: 100%; }
+
+	*::before {
+		margin-right: .5em; /* Lazy whitespace */
+		font-weight: bold;
+	}
+}
+
+#category-navigation {
+	padding: 1.5em;
+	position: sticky;
+	top: max(50vh, 300px);
+	transform: translateY(-50%);
+	border-radius: 1em;
+	align-items: flex-start;
+
+	li { font-size: 16pt; }
+	li.empty, li.empty a {
+		color: #aaa;
+		text-decoration: line-through;
+	}
+	.minor {
+		margin-top: var(--spacing);
+		width: 60%;
+		align-self: flex-end;
+		text-align: right;
+	}
+
+	&::before {
+		content: "Jump to";
+		font-weight: bold;
+		font-size: 24pt;
+	}
+}
+
+.categorized-listing {
+	display: flex;
+	flex-flow: row wrap; /* Place overflowing elements below existing ones */
+	gap: var(--spacing);
+
+	&:empty {
+		justify-content: center;
+		color: #aaa;
+		font-weight: 500;
+		/* Avoid repeating message when category is empty. */
+		&::before { content: "There is currently no items for this category. Please try again later."; }
+	}
+}
+
+#listing-categories {
+	gap: var(--spacing);
+	h1 {
+		padding: .4em .8em;
+		&:not(:first-child) { margin-top: 50px; }
+	}
+	.minor { font-weight: 600; }
+}
+
+/* Move location/salary texts to the bottom so they are aligned to that in other listings of the
+ * same row. */
+/* NOTE: This should've been named `listing-preview` */
+.listing-front {
+	flex: 1;
+	align-items: flex-end;
+	h1 { align-self: center; }
+	h2 { flex: 1; }
+}
+
+/* Avoid using the same text prefixes in every listing entry. */
+/* TODO: Use feather icons for always-visible info */
+.job-ident::before { content: "Ref. Number:"; }
+.job-company::before { content: "Company:"; }
+.job-superior::before { content: "Report to:"; }
+.job-langs::before { content: "Languages:"; }
+.job-frameworks::before { content: "Frameworks:"; }
+.job-experience::before { content: "Experience:"; }
+.job-essentials::before { content: "Essential qualifications:" }
+.job-preferences::before { content: "Preferable qualifications:" }
+
+.job-description {
+	text-indent: 1em; /* Indent the first line */
+	&::before {
+		content: "Brief Description";
+		text-indent: 0; /* No ident for the lazy title */
+	}
+}
+
+.job-apply-btn {
+	position: absolute;
+	top: 4.5em;
+	right: 25px;
+	padding: .5em 1.5em;
+	border-radius: .7em;
+	background-color: black;
+	color: white;
+	font-size: 20pt;
+	text-decoration: none;
+	&:hover { background: #333; }
+	&::before { content: "Apply!"; margin: 0 !important; }
+}
+
+/* Narrow screen styling */
+@media (max-width: 1200px) {
+	#page--jobs { flex-direction: column; align-items: center; }
+	#category-navigation { position: static; transform: none; }
+}
+

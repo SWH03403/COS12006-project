@@ -1,0 +1,113 @@
+@import "global.css";
+
+body > main {
+	gap: 50px;
+
+	button[type="submit"],
+	h2:not(:first-child) { margin-top: 20px; }
+
+	h2 {
+		margin-bottom: 5px;
+		line-height: 1.2em;
+		text-align: center;
+	}
+}
+
+#application-form {
+	--round: 2em;
+
+	gap: 5px;
+	width: 400px;
+	max-width: 100%;
+	background-color: white;
+
+	/* Highlight (by inverting colors of) the label when its corresponding input is focused. */
+	> *:has(:focus) label {
+		border-bottom: var(--form-border-active);
+		background-color: black;
+		color: white;
+	}
+}
+
+/* Styling for Yes/No questions. */
+.input-yesno {
+	align-items: center;
+
+	label {
+		margin-right: 10px;
+		border-radius: 1em;
+		font-weight: 500;
+	}
+
+	input {
+		border: 2px solid var(--select-color);
+		text-align: center;
+		min-width: 50px;
+	}
+	/* Round left-side of the first option (usually "Yes" button) */
+	input:not(:last-child) { border-radius: 1em 0 0 1em; }
+	input:last-child {
+		/* Prevent adjacent borders from becoming doubly thickened */
+		border-left: none;
+		/* Round right-side of the last option (usually "No" button) */
+		border-radius: 0 1em 1em 0;
+	}
+	/* Highlight an option when it is selected */
+	input:checked {
+		background-color: var(--select-color);
+		color: white;
+		font-weight: bold;
+	}
+	/* Pseudo texts to avoid repeating in HTML */
+	input[value="true"]::before { content: "Yes"; }
+	input[value="false"]::before { content: "No"; }
+}
+
+/* Styling for multiple-but-limited-choice questions. */
+#application-form .input-multi {
+	label:first-child {
+		border: none;
+		margin-right: 10px;
+		border-radius: 1em;
+	}
+	/* Primary buttons used to select option. */
+	label:not(:first-child) {
+		border: var(--form-border-active);
+		background-color: white;
+		color: black;
+		font-weight: normal;
+		text-align: center;
+		border-radius: 0;
+	}
+	/* Prevent adjacent borders from becoming doubly thickened */
+	label:not(:last-child) { border-right: none; }
+	/* Round the left side of the first option (by select the label right after an input) */
+	input:first-of-type + label { border-radius: 1em 0 0 1em; }
+	/* Round the right side of the first last */
+	label:last-child { border-radius: 0 1em 1em 0; }
+
+	/* Highlight (invert colors of) the selected option */
+	&:has(:active) label:first-child, /* Fix flashing when focus is lost by the label being clicked. */
+	input:checked + label {
+		background-color: var(--select-color);
+		color: white;
+		font-weight: bold;
+	}
+	/* Hide but not disable the underlying radio inputs */
+	input { padding: 0; max-width: 0; }
+}
+
+/* Draw border around the whole input in column sections */
+#application-form input[type="file"],
+#form-start-date {
+	border: var(--form-border);
+	border-radius: 0 0 1em 1em; /* Round bottom */
+}
+/* Highlight border when input is focused */
+#application-form input[type="file"]:focus,
+#form-start-date:has(input:focus) { border: var(--form-border-active); }
+/* Reduce boldness */
+label[for="input-documents"],
+label[for="input-start"] { font-weight: 500; }
+#input-start { border: none; }
+
