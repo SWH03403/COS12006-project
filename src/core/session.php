@@ -35,6 +35,9 @@ class Session {
 		unset($_SESSION[$key]);
 		return $val;
 	}
+
+	public static function user(): ?User { return User::_from_session(); }
+	public static function has_user(): bool { return !is_null(self::user()); }
 }
 
 class Csrf {
@@ -51,23 +54,24 @@ class Csrf {
 class User {
 	private const KEY = 'user';
 
-	private function __construct (
-		private string $name,
-	) {}
-	public static function from_session(): ?self {
-		$name = Session::get(self::KEY);
-		return $name? new self($name) : null;
-	}
-	// NOTE: Should be `has_logged_in`, but I'm obsessed with short function names. =~="
-	public static function has_login(): bool { return !is_null(self::from_session()); }
+	private function __construct (private string $name) {}
 
-	public function authorize(string $pass): bool {
-		return false; // TODO: Query database & check hash
+	public function authenticate(#[SensitiveParameter] string $pass): bool {
+		$row = $db->query('SELECT hash FROM user WHERE name = ?', [$this->name])[0] ?? [];
+		$hash = $row['hash'] ?? null;
+		if (is_null($hash)) { return false; }
+		return password_verify($pass, $hash);
 	}
-	public static function login(string $name, string $pass): ?self {
+	public static function login(string $name, #[SensitiveParameter] string $pass): ?self {
 		$user = new self($name); // could be non-existent.
-		if (!$user->authorize($pass)) { return null; }
+		if (!$user->authenticate($pass)) { return null; }
 		return $user;
 	}
 	public function logout() { Session::reset(); }
+
+	// NOTE: Hidden method, use `Session::user` instead
+	public static function _from_session(): ?self {
+		$name = Session::get(self::KEY);
+		return $name? new self($name) : null;
+	}
 }
