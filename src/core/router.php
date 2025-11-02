@@ -7,6 +7,8 @@ class Request {
 	public static function method(): string { return $_SERVER['REQUEST_METHOD']; }
 	public static function is_post(): bool { return self::method() == 'POST'; }
 
+	public static function header(string $key): string { return $_SERVER["HTTP_$key"]; }
+
 	public static function param(string $key, bool $trim = true, bool $html = false): ?string {
 		$dict = is_post()? $_POST : $_GET;
 		$val = $dict[$key] ?? null;
