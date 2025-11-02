@@ -47,3 +47,27 @@ class Csrf {
 		return Session::pop(self::KEY) === $token;
 	}
 }
+
+class User {
+	private const KEY = 'user';
+
+	private function __construct (
+		private string $name,
+	) {}
+	public static function from_session(): ?self {
+		$name = Session::get(self::KEY);
+		return $name? new self($name) : null;
+	}
+	// NOTE: Should be `has_logged_in`, but I'm obsessed with short function names. =~="
+	public static function has_login(): bool { return !is_null(self::from_session()); }
+
+	public function authorize(string $pass): bool {
+		return false; // TODO: Query database & check hash
+	}
+	public static function login(string $name, string $pass): ?self {
+		$user = new self($name); // could be non-existent.
+		if (!$user->authorize($pass)) { return null; }
+		return $user;
+	}
+	public function logout() { Session::reset(); }
+}
