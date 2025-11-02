@@ -66,6 +66,7 @@ class User {
 		$user = new self($name); // could be non-existent
 		if (!$user->authenticate($pass)) { return null; }
 		Session::force_new(); // remove userless session
+		Session::set(self::KEY, $user->name);
 		return $user;
 	}
 	public function logout() { Session::reset(); }
