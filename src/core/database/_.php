@@ -2,29 +2,11 @@
 class Database {
 	private static ?self $instance = null;
 
-	public static function get(): self { return (self::$instance = self::$instance ?? new self()); }
-
-	public static function run_migrations() {
-		$db = self::get();
-		$db->query('CREATE TABLE IF NOT EXISTS ' . MIGRATIONS_TABLE . '(
-			idx INTEGER PRIMARY KEY
-		) WITHOUT ROWID;');
-		$last = $db->query('SELECT MAX(idx) FROM ' . MIGRATIONS_TABLE)[0]['MAX(idx)'] ?? null;
-		$last = $last? intval($last) : 0;
-
-		foreach (range($last, 9999) as $idx) {
-			$base = str_pad("$idx", 4, "0", STR_PAD_LEFT);
-			$file = MIGRATIONS_DIR . "/$base.sql";
-
-			if (!is_readable($file)) { break; }
-			$data = file_get_contents($file);
-			foreach (explode(';', $data) as $stmt) {
-				$stmt = trim($stmt);
-				if (empty($stmt)) { continue; }
-				$db->query("$stmt;");
-			}
-			$db->query('INSERT INTO ' . MIGRATIONS_TABLE . ' VALUES (?)', [$idx]);
-		}
+	public static function get(): self {
+		if (!is_null(self::$instance)) { return self::$instance; }
+		self::$instance = new self();
+		Migration::run_all(self::$instance);
+		return self::$instance;
 	}
 
 	private function __construct(
@@ -52,5 +34,3 @@ class Database {
 		return $rows;
 	}
 }
-
-Database::run_migrations();
