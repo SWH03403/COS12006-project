@@ -10,7 +10,7 @@
 /* ======================================= GLOBAL STYLING ======================================= */
 /* Background */
 body {
-	background-image: url("/images/background.png");
+	background-image: url("/static/images/background.png");
 	background-attachment: scroll;
 	background-color: #000;
 	background-position: center 0;
@@ -543,7 +543,7 @@ label[for="input-start"] { font-weight: 500; }
 	position: relative;
 
 	&::after {
-		background-image: url("/images/cute.png");
+		background-image: url("/static/images/cute.png");
 		background-size: cover;
 		content: "";
 		opacity: 90%;
