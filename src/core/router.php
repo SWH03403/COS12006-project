@@ -21,13 +21,14 @@ class Request {
 }
 
 class Catcher {
-	public static function catch(int $code): never {
+	private static function code(int $code): never {
 		http_response_code($code);
 		render("status/$code");
 		exit;
 	}
 
-	public static function not_found() { self::catch(404); }
+	public static function not_found(): never { self::code(404); }
+	public static function internal_error(): never { self::code(500); }
 }
 
 class Router {
