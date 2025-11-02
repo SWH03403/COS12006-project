@@ -63,8 +63,9 @@ class User {
 		return password_verify($pass, $hash);
 	}
 	public static function login(string $name, #[SensitiveParameter] string $pass): ?self {
-		$user = new self($name); // could be non-existent.
+		$user = new self($name); // could be non-existent
 		if (!$user->authenticate($pass)) { return null; }
+		Session::force_new(); // remove userless session
 		return $user;
 	}
 	public function logout() { Session::reset(); }
