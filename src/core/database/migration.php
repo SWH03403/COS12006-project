@@ -7,7 +7,7 @@ class Migration {
 			idx INTEGER PRIMARY KEY
 		) WITHOUT ROWID;');
 		$last = $db->query('SELECT MAX(idx) FROM ' . self::TABLE)[0]['MAX(idx)'] ?? null;
-		$next = $last? (intval($last) + 1) : 0;
+		$next = is_null($last)? 0 : ($last + 1);
 
 		foreach (range($next, 9999) as $idx) {
 			$base = str_pad("$idx", 4, "0", STR_PAD_LEFT) . '.sql';
