@@ -2,12 +2,7 @@
 class Database {
 	private static ?self $instance = null;
 
-	public static function get(): self {
-		if (!is_null(self::$instance)) { return self::$instance; }
-		self::$instance = new self();
-		Migration::run_all(self::$instance);
-		return self::$instance;
-	}
+	public static function get(): self { return (self::$instance = self::$instance ?? new self()); }
 
 	private function __construct(
 		private SQLite3 $conn = new SQLite3(DATABASE_URL),
