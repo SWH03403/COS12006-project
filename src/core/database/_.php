@@ -4,13 +4,15 @@ class Database {
 
 	public static function get(): self { return (self::$instance = self::$instance ?? new self()); }
 
-	private function __construct(
-		private SQLite3 $conn = new SQLite3(DATABASE_URL),
-	) {}
-	public function __destruct() { $this->conn->close(); }
+	private function __construct(public SQLite3 $inner = new SQLite3(DATABASE_URL)) {}
+	public function __destruct() { $this->inner->close(); }
+
+	public function query_unsafe(string $stmt): bool {
+		return $this->inner->query($stmt) !== false;
+	}
 
 	public function query(string $stmt, array $args = []): ?array {
-		$query = $this->conn->prepare($stmt);
+		$query = $this->inner->prepare($stmt);
 		foreach ($args as $idx => $arg) {
 			$type = match (gettype($arg)) {
 				'NULL' => SQLITE3_NULL,
