@@ -17,7 +17,11 @@ class Migration {
 			echo "Applying $base\n";
 
 			$data = file_get_contents($file);
-			if (!$db->query_unsafe($data)) { return false; }
+			foreach (explode(";\n", $data) as $stmt) {
+				$stmt = trim($stmt);
+				if (empty($stmt)) { continue; }
+				if (!$db->query_unsafe("$stmt;")) { return false; }
+			}
 			$res = $db->query('INSERT INTO ' . self::TABLE . ' VALUES (?)', [$idx]);
 			if (is_null($res)) { return false; }
 		}
