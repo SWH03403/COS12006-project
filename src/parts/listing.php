@@ -3,7 +3,7 @@
 	<ul>
 	<?php foreach ($data['sections'] as $section) {
 		$empty = empty($section['entries'])? ' class="empty"' : "";
-		echo "<li><a href=\"#{$section['id']}\"$empty>{$section['name']}</a></li>";
+		echo "<li$empty><a href=\"#{$section['id']}\">{$section['name']}</a></li>";
 	} ?>
 	</ul>
 	<p class="minor">Click on a job listing to expand/collapse its details</p>

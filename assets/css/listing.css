@@ -66,7 +66,7 @@ main {
 	flex-flow: row wrap; /* Place overflowing elements below existing ones */
 	gap: var(--spacing);
 
-	&:empty {
+	&.empty {
 		justify-content: center;
 		color: #aaa;
 		font-weight: 500;
