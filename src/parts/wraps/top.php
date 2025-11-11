@@ -9,4 +9,4 @@
 </head>
 <body class="flex-y">
 <?php render('wraps/header') ?>
-<main class="fill flex-y flex-o">
+<main id="content" class="fill flex-y flex-o">
