@@ -12,7 +12,7 @@ class Request {
 	public static function header(string $key): ?string { return $_SERVER["HTTP_$key"] ?? null; }
 
 	public static function param(string $key, bool $trim = true, bool $html = false): ?string {
-		$dict = is_post()? $_POST : $_GET;
+		$dict = self::is_post()? $_POST : $_GET;
 		$val = $dict[$key] ?? null;
 		if (is_null($val)) { return $val; }
 		$val = $trim? trim($val) : $val;
