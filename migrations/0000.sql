@@ -1,9 +1,8 @@
 CREATE TABLE user (
 	id INTEGER PRIMARY KEY,
-	name TEXT NOT NULL,
+	email TEXT NOT NULL UNIQUE,
 	hash TEXT NOT NULL,
 	display TEXT NOT NULL,
-	email TEXT NOT NULL,
 
 	created DATETIME NOT NULL
 		DEFAULT current_timestamp,

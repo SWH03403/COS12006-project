@@ -8,11 +8,11 @@ class Session {
 		session_start();
 	}
 
-	private static function force_new() {
+	public static function force_new() {
 		self::init();
 		session_regenerate_id(true);
 	}
-	private static function reset() {
+	public static function reset() {
 		self::init();
 		session_unset();
 		session_destroy();

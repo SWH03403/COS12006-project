@@ -1,22 +1,22 @@
 <?php
-function render_nav() {
-	$cur = Request::path();
-	$routes = [
-		'' => 'Home',
-		'jobs' => 'Listings',
-		'apply' => 'Application',
-		'about' => 'About',
-	];
-	foreach ($routes as $path => $disp) {
-		$is_cur = ($cur == $path)? ' class="current-page"' : '';
-		echo "<li><a href=\"/$path\"$is_cur>$disp</a></li>";
-	}
+$main_routes = [
+	'/' => 'Home',
+	'/jobs' => 'Listings',
+	'/apply' => 'Application',
+	'/about' => 'About',
+];
+if (Session::has_user()) {
+	$session_routes['/session/logout'] = 'Log out';
+} else {
+	$session_routes['/session/login'] = 'Log in';
+	$session_routes['/session/signup'] = 'Sign up';
 } ?>
 <header class="flex">
 	<nav id="global-navigation" class="fill flex">
 		<ul class="fill flex flex-o">
-			<?php render_nav() ?>
+			<?php render_links($main_routes) ?>
 			<li class="fill"></li>
+			<?php render_links($session_routes) ?>
 		</ul>
 	</nav>
 </header>

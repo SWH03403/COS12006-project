@@ -59,6 +59,7 @@ class Router {
 		header("Location: /$path");
 		exit;
 	}
+	public static function return(): never { self::redirect(self::DEFAULT); }
 
 	public static function route() {
 		$path = Request::path();

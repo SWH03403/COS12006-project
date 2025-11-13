@@ -89,6 +89,22 @@ summary {
 	list-style-type: none; /* Hide `::marker` pseudo element in toggle trigger */
 }
 
+form.box {
+	--round: 2em;
+
+	max-width: 100%;
+	align-items: stretch;
+	gap: 5px;
+	background-color: white;
+
+	/* Highlight (by inverting colors of) the label when its corresponding input is focused. */
+	> *:has(:focus) label {
+		border-bottom: var(--form-border-active);
+		background-color: black;
+		color: white;
+	}
+}
+
 label {
 	background-color: var(--form-color);
 	padding: .2em .6em;
@@ -108,7 +124,7 @@ input, select {
 	/* Make the bottom color more pronounced when focused. */
 	&:focus { border-bottom: var(--form-border-active); }
 }
-input:not(:focus) { text-align: right; }
+input:placeholder-shown { text-align: right; }
 select {
 	padding: 0;
 	padding-left: .5em;
@@ -117,7 +133,6 @@ select {
 input::placeholder {
 	color: #aaa;
 	font-weight: 500;
-	text-align: right;
 }
 input[type="date"], select { text-align: right; }
 input[type="file"] {
@@ -132,8 +147,8 @@ input[type="radio"] { appearance: none; }
 
 /* Form submission button */
 button[type="submit"] {
-	padding: 1em 2em;
-	font-size: 16pt;
+	padding: .8em 1em;
+	font-size: 20pt;
 	font-weight: bold;
 	background-color: #000;
 	color: #fff;
@@ -142,6 +157,7 @@ button[type="submit"] {
 
 	&:hover { background-color: #333; }
 }
+form > button[type="submit"] { margin-top: 20px; }
 
 /* Common flex attribute, `flex` is aliased to `flex-x` */
 .flex, .flex-x, .flex-y { display: flex; }
@@ -157,6 +173,10 @@ button[type="submit"] {
 	background-color: #fffa; /* ~60% transparent white */
 	box-shadow: 0 0 20px #0004;
 	backdrop-filter: blur(5px); /* Blur everything behind this element */
+}
+.errors-box {
+	list-style-position: inside;
+	font-size: 16pt;
 }
 
 .important { font-weight: bold; }
