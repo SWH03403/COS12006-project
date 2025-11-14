@@ -1,13 +1,12 @@
 <section id="company-introduction" class="flex flex-o box">
 	<img id="company-logo" src="/static/images/logos/duodie.png" alt="Company Logo">
 	<div id="company-info">
-		<h1>DuoOrDxe Ltd</h1>
+		<h1>Find your dream job, fast.</h1>
 		<p>
-			Otherwise known as
-			<span class="important">"Group 7"</span>.
-			We are essential two IT students who are in an employment simulation as part of the
-			<span class="important">COS12006 "Web Technology Project"</span>
-			course trying to complete its primary assignment.
+			Dive in the world of 
+			<span class="important">job hunting</span>.
+			Submit your job applicaitions and find vacant positions in a flash with
+			<span class="important">DueOrDxe</span>.
 		</p>
 		<p>
 			<span class="tiny">Spoiler: we've been speedrunning all the sprints and scrims right before
