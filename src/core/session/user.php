@@ -47,4 +47,5 @@ class User {
 		return $info;
  	}
 	public function applicant(): ?Applicant { return Applicant::_from_user($this); }
+	public function clear_account_cache() { Session::pop(self::KEY_INFO); }
 }
