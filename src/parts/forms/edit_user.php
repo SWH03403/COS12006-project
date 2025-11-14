@@ -1,9 +1,13 @@
 <form class="box flex-y flex-o" method="post">
 	<?php
-	render('input', ['Email', 'email', 'placeholder' => '(unchanged)', 'required' => false]);
+	render('input', [
+		'Email', 'email',
+		'default' => $data['account']->email,
+		'required' => false,
+	]);
 	render('input', [
 		'Display Name', 'display',
-		'placeholder' => '(unchanged)',
+		'default' => $data['account']->display,
 		'required' => false,
 	]);
 	render('input', [

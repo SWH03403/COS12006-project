@@ -2,11 +2,13 @@
 $label = $data[0] ?? $data['label'];
 $name = $data[1] ?? $data['name'];
 $type = $data[2] ?? $data['type'] ?? 'text';
-$persist = $data[3] ?? $data['persist'] ?? ($type == 'text');
-$required = $data[4] ?? $data['required'] ?? true;
-$placeholder = $data[5] ?? $data['placeholder'] ?? null;
+$persist = $data['persist'] ?? ($type == 'text');
+$default = $data['default'] ?? null;
+$required = $data['required'] ?? true;
+$placeholder = $data['placeholder'] ?? null;
 
 $value = (Request::is_post() && $persist)? Request::param($name) : null;
+$value = is_null($value)? $default : $value;
 $value = is_null($value)? '' : ' value="' . html_sanitize($value) . '"';
 
 global $_input_counter;
