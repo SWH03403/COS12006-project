@@ -2,6 +2,8 @@
 declare(strict_types = 1);
 
 const DATABASE_URL = __DIR__ . '/db.sqlite';
+const DATETIME_FORMAT = 'Y-m-d H:i:s';
+const DATE_FORMAT = 'Y-m-d';
 class Dirs {
 	public const ASSETS = __DIR__ . '/assets';
 	public const COMPONENTS = __DIR__ . '/src/parts';

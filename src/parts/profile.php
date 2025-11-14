@@ -10,9 +10,9 @@
 		<span>Email:</span>
 		<span><?= $acc->email ?></span>
 		<span>Created at:</span>
-		<span><?= $acc->created->format(DateTimeInterface::W3C) ?></span>
+		<span><?= $acc->created->format(DATETIME_FORMAT) ?></span>
 		<span>Updated at:</span>
-		<span><?= $acc->updated->format(DateTimeInterface::W3C) ?></span>
+		<span><?= $acc->updated->format(DATETIME_FORMAT) ?></span>
 		<span>Is manager:</span>
 		<span><?= $acc->is_manager? 'Yes' : 'No' ?></span>
 	</div>
