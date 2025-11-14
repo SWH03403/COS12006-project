@@ -1,11 +1,15 @@
 <?php
 class Csrf {
 	private const KEY = 'csrf_token';
+	public const FORM_FIELD = '_' . self::KEY;
 
-	public static function new() { Session::set(self::KEY, bin2hex(random_bytes(32))); }
-	public static function get(): ?string { Session::get(self::KEY); }
-	public static function check(string $token): bool {
-		if (is_null(self::get())) { return false; }
-		return Session::pop(self::KEY) === $token;
+	public static function new(): string {
+		$token = bin2hex(random_bytes(32));
+		Session::set(self::KEY, $token);
+		return $token;
+	}
+	public static function check(): bool {
+		if (is_null(Session::get(self::KEY))) { return false; }
+		return Session::pop(self::KEY) === Request::param(self::FORM_FIELD);
 	}
 }
