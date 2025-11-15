@@ -4,7 +4,7 @@ Session::require_no_user();
 $errors = [];
 if (Request::is_post()) {
 	$email = Request::param('email');
-	$pass = Request::param('pass', false);
+	$pass = Request::param('password', false);
 
 	if (!Csrf::check()) { $errors[] = 'Invalid CSRF token'; }
 	if (strlen($email) > 30) { $errors[] = 'Email is too long'; }
@@ -17,8 +17,8 @@ end_post:
 
 render_page(function() use ($errors) {
 	echo '<form class="box flex-y flex-o" method="post">';
-	render('input', 'Email', 'email');
-	render('input', 'Password', 'pass', type: 'password');
+	render('input', 'Email');
+	render('input', 'Password', type: 'password');
 	render('input/csrf');
 	echo '<button type="submit">Login</button></form>';
 	render('errors', $errors);

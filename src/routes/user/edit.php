@@ -53,7 +53,7 @@ end_post:
 render_page(function() use ($errors, $account) {
 	echo '<form class="box flex-y flex-o" method="post">';
 	render('input',
-		'Email', 'email',
+		'Email',
 		default: $account->email,
 		required: false,
 	);

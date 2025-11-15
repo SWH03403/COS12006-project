@@ -1,6 +1,6 @@
 <?php
 $label = $D[0] ?? $D['label'];
-$name = $D[1] ?? $D['name'];
+$name = $D[1] ?? $D['name'] ?? label_to_name($label);
 $type = $D[2] ?? $D['type'] ?? 'text';
 $persist = $D['persist'] ?? ($type !== 'password');
 $default = $D['default'] ?? null;

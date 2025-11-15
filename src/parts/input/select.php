@@ -1,6 +1,6 @@
 <?php
 $label = $D[0] ?? $D['label'];
-$name = $D[1] ?? $D['name'];
+$name = $D[1] ?? $D['name'] ?? label_to_name($label);
 $options = $D[2] ?? $D['options'];
 $persist = $D['persist'] ?? true;
 $required = $D['required'] ?? true;

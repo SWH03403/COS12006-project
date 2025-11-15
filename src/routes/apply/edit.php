@@ -85,10 +85,10 @@ render_page(function() use ($errors) {
 	render('errors', $errors);
 	echo '<form id="personal-info" class="box flex-y" method="post">';
 	render_header('Identity');
-	render('input', 'First Name', 'first-name');
-	render('input', 'Last Name', 'last-name');
+	render('input', 'First Name');
+	render('input', 'Last Name');
 	render('input', 'Date of Birth', 'dob', type: 'date');
-	render('input/select', 'Gender', 'gender', [
+	render('input/select', 'Gender', options: [
 		'm' => 'Male (he/him)',
 		'f' => 'Female (she/her)',
 		'x' => 'Non-binary (they/them)',
@@ -96,10 +96,10 @@ render_page(function() use ($errors) {
 	]);
 
 	render_header('Address');
-	render('input', 'Street', 'street');
-	render('input', 'Town', 'town');
-	render('input/select', 'State', 'state', State::options());
-	render('input', 'Postcode', 'postcode', 'number');
+	render('input', 'Street');
+	render('input', 'Town');
+	render('input/select', 'State', options: State::options());
+	render('input', 'Postcode', type: 'number');
 
 	render_header('Contact');
 	render('input', 'Phone No.', 'phone');
