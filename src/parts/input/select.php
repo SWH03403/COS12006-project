@@ -8,7 +8,7 @@ $required = $D['required'] ?? true;
 $selected = (Request::is_post() && $persist)? Request::param($name) : null;
 $unselected = is_null(array_find($options, fn($_, $k) => $k === $selected));
 
-$id = input_id();
+$id = input_id()[1];
 $required = $required? ' required' : '';
 
 echo <<<TEXT

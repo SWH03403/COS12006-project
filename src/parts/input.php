@@ -11,9 +11,8 @@ $value = (Request::is_post() && $persist)? Request::param($name) : null;
 $value = is_null($value)? $default : $value;
 $value = is_null($value)? '' : ' value="' . html_sanitize($value) . '"';
 
-global $_input_first;
-$id = input_id();
-$focus = $_input_first? ' autofocus' : '';
+[$first, $id] = input_id();
+$focus = $first? ' autofocus' : '';
 $required = $required? ' required' : '';
 $placeholder = is_null($placeholder)? '' : " placeholder=\"$placeholder\"";
 

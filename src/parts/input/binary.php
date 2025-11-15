@@ -7,7 +7,7 @@ $required = $D['required'] ?? true;
 $checked = (Request::is_post() && $persist)? Request::param($name) : null;
 $checked = is_null($checked)? null : parse_bool($checked);
 
-$id = input_id();
+$id = input_id()[1];
 $required = $required? ' required' : '';
 $yesc = ($checked === true)? ' checked' : '';
 $noc = ($checked === false)? ' checked' : '';

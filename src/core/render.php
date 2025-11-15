@@ -1,9 +1,9 @@
 <?php
-function input_id(): string {
-	global $_input_first, $_input_counter;
-	$_input_first = is_null($_input_first);
-	$_input_counter = is_null($_input_counter)? 0 : $_input_counter;
-	return 'input-auto-' . (++$_input_counter);
+function input_id(): array {
+	global $_input_counter;
+	$_input_counter = is_int($_input_counter)? $_input_counter : 0;
+	$first = $_input_counter == 0;
+	return [$first, 'input-auto-' . (++$_input_counter)];
 }
 
 function render(string $component, ...$_data) {
