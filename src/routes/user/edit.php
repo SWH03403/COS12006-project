@@ -49,7 +49,7 @@ if (Request::is_post()) {
 }
 end_post:
 
-render_page('forms/edit_user',
+render_page(fn() => render('forms/edit_user'),
 	title: 'Edit profile',
 	account: $user->account(),
 	errors: $errors,

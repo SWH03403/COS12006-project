@@ -4,7 +4,10 @@ class Catcher {
 		http_response_code($code);
 		if (!is_null($msg)) {
 			$text = "$code $msg";
-			render_page("<h1>$text</h1>", ['full_title' => $text]);
+			render_page(
+				function() { echo "<h1>$text</h1>"; },
+				full_title: $text,
+			);
 		}
 		exit;
 	}

@@ -15,7 +15,7 @@ if (Request::is_post()) {
 }
 end_post:
 
-render_page('forms/auth_user',
+render_page(fn() => render('forms/auth_user'),
 	title: 'Login',
 	errors: $errors,
 );

@@ -26,7 +26,7 @@ if (Request::is_post()) {
 }
 end_post:
 
-render_page('forms/new_user',
+render_page(fn() => render('forms/new_user'),
 	title: 'Sign up',
 	errors: $errors,
 );

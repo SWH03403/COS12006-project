@@ -1,5 +1,5 @@
 <?php
-render_page('home',
+render_page(fn() => render('home'),
 	title: 'Home',
 	style: 'home',
 );
