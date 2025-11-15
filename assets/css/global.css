@@ -159,6 +159,40 @@ button[type="submit"] {
 }
 form > button[type="submit"] { margin-top: 20px; }
 
+/* Styling for Yes/No questions. */
+.input-yesno {
+	align-items: center;
+
+	label {
+		margin-right: 10px;
+		border-radius: 1em;
+		font-weight: 500;
+	}
+
+	input {
+		border: 2px solid var(--select-color);
+		text-align: center;
+		min-width: 50px;
+	}
+	/* Round left-side of the first option (usually "Yes" button) */
+	input:not(:last-child) { border-radius: 1em 0 0 1em; }
+	input:last-child {
+		/* Prevent adjacent borders from becoming doubly thickened */
+		border-left: none;
+		/* Round right-side of the last option (usually "No" button) */
+		border-radius: 0 1em 1em 0;
+	}
+	/* Highlight an option when it is selected */
+	input:checked {
+		background-color: var(--select-color);
+		color: white;
+		font-weight: bold;
+	}
+	/* Pseudo texts to avoid repeating in HTML */
+	input[value="true"]::before { content: "Yes"; }
+	input[value="false"]::before { content: "No"; }
+}
+
 /* Common flex attribute, `flex` is aliased to `flex-x` */
 .flex, .flex-x, .flex-y { display: flex; }
 .flex-y { flex-direction: column; }
