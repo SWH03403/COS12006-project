@@ -18,7 +18,7 @@ if (Request::is_post()) {
 	}
 	if (strlen($email) > 30) { $errors[] = 'Email is too long'; }
 	if (!empty($pass_new)) {
-		if (strlen($pass_new) < 30) { $errors[] = 'New password is too short'; }
+		if (strlen($pass_new) < 1) { $errors[] = 'New password is too short'; }
 		if ($pass_new != $pass_rep) { $errors[] = 'Password repetition does not match'; }
 	}
 	if (!empty($errors)) { goto end_post; }

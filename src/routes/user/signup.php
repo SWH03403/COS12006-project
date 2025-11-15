@@ -12,7 +12,7 @@ if (Request::is_post()) {
 	if (strlen($dname) > 20) { $errors[] = 'Display name is too long'; }
 	if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) { $errors[] = 'Email is invalid'; }
 	if (strlen($email) > 30) { $errors[] = 'Email is too long'; }
-	if (strlen($pass1) < 30) { $errors[] = 'Password is too short'; }
+	if (strlen($pass1) < 1) { $errors[] = 'Password is too short'; }
 	if ($pass1 != $pass2) { $errors[] = 'Password repetition does not match'; }
 	if (!empty($errors)) { goto end_post; }
 
