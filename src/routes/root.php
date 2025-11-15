@@ -4,12 +4,12 @@ render_page(function() {
 	<section id="website-introduction" class="flex flex-o box">
 		<img id="company-logo" src="/static/images/logos/duodie.png" alt="Company Logo">
 		<div id="company-info">
-			<h1>Find your dream job, fast.</h1>
+			<h1>Find your dream job, fast!</h1>
 			<p>
-				Dive in the world of
-				<span class="important">job hunting</span>.
+				Dive in the world of <span class="important">job hunting</span>.
 				Submit your job applicaitions and find vacant positions in a flash with
-				<span class="important">DueOrDxe</span>.
+				<span class="important">&gt;Speed Job</span>, a product of
+				<span class="important">DuoOrDxe</span>.
 			</p>
 			<p>
 				<span class="tiny">Spoiler: we've been speedrunning all the sprints and scrims right before
