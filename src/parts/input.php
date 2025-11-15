@@ -1,11 +1,11 @@
 <?php
-$label = $arg_0 ?? $arg_label;
-$name = $arg_1 ?? $arg_name;
-$type = $arg_2 ?? $arg_type ?? 'text';
-$persist = $arg_persist ?? ($type !== 'password');
-$default = $arg_default ?? null;
-$required = $arg_required ?? true;
-$placeholder = $arg_placeholder ?? null;
+$label = $D[0] ?? $D['label'];
+$name = $D[1] ?? $D['name'];
+$type = $D[2] ?? $D['type'] ?? 'text';
+$persist = $D['persist'] ?? ($type !== 'password');
+$default = $D['default'] ?? null;
+$required = $D['required'] ?? true;
+$placeholder = $D['placeholder'] ?? null;
 
 $value = (Request::is_post() && $persist)? Request::param($name) : null;
 $value = is_null($value)? $default : $value;

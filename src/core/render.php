@@ -6,15 +6,13 @@ function input_id(): string {
 	return 'input-auto-' . (++$_input_counter);
 }
 
-function render(string $component, ...$data) {
-	global $_g_data;
-	if (empty($data)) { $data = $_g_data; }
-	extract($data, EXTR_PREFIX_ALL, 'arg');
+function render(string $component, ...$_data) {
+	global $_g_data; $D = empty($_data)? $_g_data : $_data;
 	require Dirs::COMPONENTS . "/$component.php";
 }
 
-function render_page(callable $render_content, ...$data) {
-	global $_g_data; $_g_data = $data;
+function render_page(callable $render_content, ...$_data) {
+	global $_g_data; $_g_data = $_data;
 
 	render('wraps/top');
 	$render_content();

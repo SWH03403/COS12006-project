@@ -1,8 +1,8 @@
 <?php
-$label = $data[0] ?? $data['label'];
-$name = $data[1] ?? $data['name'];
-$persist = $data['persist'] ?? true;
-$required = $data['required'] ?? true;
+$label = $D[0] ?? $D['label'];
+$name = $D[1] ?? $D['name'];
+$persist = $D['persist'] ?? true;
+$required = $D['required'] ?? true;
 
 $checked = (Request::is_post() && $persist)? Request::param($name) : null;
 $checked = is_null($checked)? null : parse_bool($checked);

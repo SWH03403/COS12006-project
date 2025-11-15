@@ -1,5 +1,5 @@
 <?php
-$messages = $arg_0 ?? $arg_messages ?? [];
+$messages = $D[0] ?? $D['messages'] ?? [];
 
 $show = !empty($messages);
 if ($show) { echo '<ul class="box errors-box flex-y">'; }

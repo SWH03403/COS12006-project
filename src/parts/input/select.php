@@ -1,9 +1,9 @@
 <?php
-$label = $data[0] ?? $data['label'];
-$name = $data[1] ?? $data['name'];
-$options = $data[2] ?? $data['options'];
-$persist = $data['persist'] ?? true;
-$required = $data['required'] ?? true;
+$label = $D[0] ?? $D['label'];
+$name = $D[1] ?? $D['name'];
+$options = $D[2] ?? $D['options'];
+$persist = $D['persist'] ?? true;
+$required = $D['required'] ?? true;
 
 $selected = (Request::is_post() && $persist)? Request::param($name) : null;
 $unselected = is_null(array_find($options, fn($_, $k) => $k === $selected));
