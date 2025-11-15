@@ -1,7 +1,8 @@
 <?php
 Session::require_user();
 $user = Session::user();
-$check_email = !$user->account()->is_manager;
+$account = $user->account();
+$check_email = !$account->is_manager;
 
 $errors = [];
 if (Request::is_post()) {
@@ -25,7 +26,7 @@ if (Request::is_post()) {
 	if (!$user->authenticate($pass_old)) { $errors[] = 'Incorrect password'; goto end_post; }
 
 	$db = Database::get();
-	$id = $user->account()->id;
+	$id = $account->id;
 	$now = new DateTimeImmutable(timezone: new DateTimeZone('UTC'))->format(DATETIME_FORMAT);
 	$res = $db->query(
 		'UPDATE user SET display = ?, email = ?, updated = ? WHERE id = ?',
@@ -39,7 +40,7 @@ if (Request::is_post()) {
 	}
 	if (!empty($errors)) { goto end_post; }
 
-	if ($email === $user->account()->email && empty($pass_new)) {
+	if ($email === $account->email && empty($pass_new)) {
 		$user->clear_account_cache();
 		Router::redirect('user');
 	} else {
@@ -53,12 +54,12 @@ render_page(function() use ($errors, $account) {
 	echo '<form class="box flex-y flex-o" method="post">';
 	render('input',
 		'Email', 'email',
-		default: $data['account']->email,
+		default: $account->email,
 		required: false,
 	);
 	render('input',
 		'Display Name', 'display',
-		default: $data['account']->display,
+		default: $account->display,
 		required: false,
 	);
 	render('input',
@@ -67,7 +68,7 @@ render_page(function() use ($errors, $account) {
 		placeholder: '(unchanged)',
 		required: false,
 	);
-	render('input', 'Repeat New Password', 'new-passrep' type: 'password', required: false);
+	render('input', 'Repeat New Password', 'new-passrep', type: 'password', required: false);
 	render('input', 'Current Password', 'pass', type: 'password');
 	render('input/csrf');
 	echo '<button type="submit">Update</button></form>';

@@ -2,15 +2,12 @@
 Session::require_user();
 $user = Session::user();
 
-funcion render_row(string $key, string $value) {
-	echo "<span>$key:</span>";
-	echo "<span>$value</span>";
-}
 
 render_page(function() use ($user) {
 	$account = $user->account();
 	$applicant = $user->applicant();
 	$new = is_null($applicant);
+	$row = fn($key, $val) => "<span>$key:</span><span>$val</span>";
 
 	$display = html_sanitize($account->display);
 	echo "<h1>Hi, $display</h1>";
@@ -24,10 +21,10 @@ render_page(function() use ($user) {
 		</div>
 		<div id="account-info">
 	TEXT;
-	render_row('Email', html_sanitize($account->email));
-	render_row('Created', $account->created->format(DATETIME_FORMAT));
-	render_row('Updated', $account->updated->format(DATETIME_FORMAT));
-	render_row('Is manager', $account->is_manager? 'Yes' : 'No');
+	echo $row('Email', html_sanitize($account->email));
+	echo $row('Created', $account->created->format(DATETIME_FORMAT));
+	echo $row('Updated', $account->updated->format(DATETIME_FORMAT));
+	echo $row('Is manager', $account->is_manager? 'Yes' : 'No');
 	echo '</div></article>';
 
 	$cmd = $new? 'Apply' : 'Edit';
