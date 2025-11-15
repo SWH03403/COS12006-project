@@ -11,10 +11,9 @@ $value = (Request::is_post() && $persist)? Request::param($name) : null;
 $value = is_null($value)? $default : $value;
 $value = is_null($value)? '' : ' value="' . html_sanitize($value) . '"';
 
-global $_input_counter;
-$_input_counter = is_null($_input_counter)? 0 : $_input_counter;
-$id = 'input-auto-' . ($_input_counter += 1);
-$focus = ($_input_counter == 1)? ' autofocus' : '';
+global $_input_first;
+$id = input_id();
+$focus = $_input_first? ' autofocus' : '';
 $required = $required? ' required' : '';
 $placeholder = is_null($placeholder)? '' : " placeholder=\"$placeholder\"";
 
