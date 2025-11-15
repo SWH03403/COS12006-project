@@ -39,8 +39,13 @@ if (Request::is_post()) {
 	}
 	if (!empty($errors)) { goto end_post; }
 
-	$user->clear_account_cache();
-	Router::redirect('user');
+	if ($email === $user->account()->email && empty($pass_new)) {
+		$user->clear_account_cache();
+		Router::redirect('user');
+	} else {
+		$user->logout();
+		Router::redirect('user/login');
+	}
 }
 end_post:
 
