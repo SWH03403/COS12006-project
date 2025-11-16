@@ -38,6 +38,18 @@ render_page(function() {
 		[ 'title' => '"Have access to the web site disabled for user a period of time on, say, three or
 		more invalid login attempts."',
 			'(unimplemented)',
+			[ 'title' => 'A new database table is used to store time of the last failed login attempts.',
+				'(The database is used as it persists between sessions, and therefore, between different
+				machines)',
+				'Another column counts the total amount of previously failed attempts.',
+				'When the threshold is met, we invalidate all attempts to login as said user.',
+				'The lock record is removed when the user successfully logs in or the lock expires.',
+			],
+			[ 'title' => 'The Login page now shows this system in action.',
+				'After a failed login, a messaged containing the number of remaining tries is shown',
+				'When the lock is engaged, the message "Account is Locked" is shown.',
+				'The duration of the lock is kept hidden for a small layer of obscurity.',
+			],
 		],
 	]);
 	echo '</div>';
