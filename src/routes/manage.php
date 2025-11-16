@@ -3,13 +3,16 @@ $db = Database::get();
 $infos = [];
 
 foreach ($db->query('SELECT * FROM eoi') as $row) {
-    $infos[] = $row;
+    $applicant_info = $db->query('SELECT * FROM user_applicant WHERE id = ?', [$row['user_id']]);
+    $infos[] = $row + ['applicant_info' => $applicant_info];
 
+    var_dump($row + ['applicant_info' => $applicant_info]);
     // $entry = &$cates[$row['id']];
 	// $entry['id'] = "category-" . strtolower(str_replace(' ', '-', $row['name']));
 	// $entry['name'] = $row['name'];
 	// $entry['entries'] = [];
 }
+exit;
 
 render_page(function() use ($infos) {
 	echo 
