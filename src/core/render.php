@@ -11,10 +11,10 @@ function render(string $component, ...$_data) {
 	require Dirs::COMPONENTS . "/$component.php";
 }
 
-function render_page(callable $render_content, ...$_data) {
+function render_page(?callable $_r = null, ...$_data) {
 	global $_g_data; $_g_data = $_data;
 
 	render('wraps/top');
-	$render_content();
+	if (!is_null($_r)) { $_r(); }
 	render('wraps/bottom');
 }
