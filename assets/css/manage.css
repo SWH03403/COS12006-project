@@ -24,8 +24,8 @@
 		justify-content: flex-start;
 	}
 
-	article:has(> details[open]) { 
-		flex-basis: 100%; 
+	article:has(> details[open]) {
+		flex-basis: 100%;
 		background: #eaeaea;
 		summary {
 			height: 10%;
@@ -36,7 +36,23 @@
 		margin-right: .5em; /* Lazy whitespace */
 		font-weight: bold;
 	}
-	
+
+}
+
+#search-bar {
+	padding: 0;
+	gap: 0;
+
+	label { display: flex; align-items: center; }
+	label, input, select { border: none; }
+
+	> :first-child label { border-radius: var(--round) var(--round) 0 var(--round); }
+
+	> [type="submit"] {
+		margin: 0;
+		padding: 0 1em;
+		font-size: 16pt;
+	}
 }
 
 #outer-box, #tool-box {
@@ -50,10 +66,6 @@
 
 #listing-eois {
 	flex-direction: column;
-	gap: var(--spacing);
-}
-
-#search-bar {
 	gap: var(--spacing);
 }
 
