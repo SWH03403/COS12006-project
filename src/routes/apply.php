@@ -16,6 +16,15 @@ end_post:
 render_page(function() use (&$job, &$errors) {
 	$info = Session::user()?->applicant();
 
+	echo '<div class="fill flex-y">';
+	render('boxlink', function() {
+
+	}, 'Job Info', '/jobs', 'Change');
+	render('boxlink', function() {
+
+	}, 'Applicant Info', '/apply/edit', 'Edit');
+	echo '</div>';
+
 	echo <<<'TEXT'
 	<div class="flex-y">
 	<section id="application-header" class="flex-y flex-o">

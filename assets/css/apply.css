@@ -1,5 +1,13 @@
 @import "global.css";
 
+#content {
+	flex-direction: row;
+	width: 1200px;
+	max-width: 100%;
+}
+
+#content > :first-child { gap: var(--spacing); }
+
 #application-header { margin-bottom: 50px; }
 
 #application-form {

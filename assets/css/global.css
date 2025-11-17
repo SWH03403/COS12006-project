@@ -290,6 +290,20 @@ form .input-check {
 	box-shadow: 0 0 20px #0004;
 	backdrop-filter: blur(5px); /* Blur everything behind this element */
 }
+.box-linked > :first-child {
+	h2 { font-size: 18pt; }
+	a {
+		padding: .1em .8em;
+		border-radius: var(--round);
+		background-color: black;
+		color: white;
+		font-size: 16pt;
+		font-weight: 500;
+		text-decoration: none;
+
+		&:hover { background-color: #444; }
+	}
+}
 .errors-box {
 	list-style-position: inside;
 	font-size: 16pt;
