@@ -23,8 +23,10 @@ CREATE TABLE eoi (
 );
 
 CREATE TABLE eoi_accept (
-	id INTEGER PRIMARY KEY REFERENCES eoi(id)
+	id INTEGER NOT NULL REFERENCES eoi(id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
-	name TEXT NOT NULL -- References job_requirement(name)
+	name TEXT NOT NULL, -- References job_requirement(name)
+
+	PRIMARY KEY(id, name)
 ) WITHOUT ROWID;
