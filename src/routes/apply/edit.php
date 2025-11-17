@@ -118,8 +118,7 @@ render_page(function() use ($errors) {
 	);
 	render('input/binary', 'Are you a veteran?', 'veteran', default: $info?->is_veteran);
 	render('input/csrf');
-
-	echo '<button type="submit">Submit</button></form>';
+	render('input/submit');
 },
 	title: 'Applicant Personal Info',
 	style: 'apply_personal',

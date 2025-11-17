@@ -33,7 +33,7 @@ render_page(function() use ($errors) {
 	render('input', 'Password', 'pass1', 'password');
 	render('input', 'Repeat Password', 'pass2', 'password');
 	render('input/csrf');
-	echo '<button type="submit">Sign up!</button></form>';
+	render('input/submit', 'Sign up!');
 	render('errors', $errors);
 },
 	title: 'Sign up',

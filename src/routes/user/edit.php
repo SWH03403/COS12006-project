@@ -71,7 +71,7 @@ render_page(function() use ($errors, $account) {
 	render('input', 'Repeat New Password', 'new-passrep', type: 'password', required: false);
 	render('input', 'Current Password', 'pass', type: 'password');
 	render('input/csrf');
-	echo '<button type="submit">Update</button></form>';
+	render('input/submit', 'Update');
 	render('errors', $errors);
 },
 	title: 'Edit profile',

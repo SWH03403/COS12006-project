@@ -24,7 +24,7 @@ render_page(function() use ($errors) {
 	render('input', 'Email');
 	render('input', 'Password', type: 'password');
 	render('input/csrf');
-	echo '<button type="submit">Login</button></form>';
+	render('input/submit', 'Login');
 	render('errors', $errors);
 },
 	title: 'Login',
