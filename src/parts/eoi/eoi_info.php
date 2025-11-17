@@ -10,7 +10,7 @@
 	</div>
 
     <details class="flex flex-y eoi-details">
-        <summary></summary>
+        <!-- <summary></summary> -->
 
         <?php $A = $D['applicant_info']; $A = $A[0]?>
 
@@ -31,13 +31,44 @@
         <p>Reason: <?= $D['reason'] ?></p>
 
         <hr>
+        <?php
+        $db = Database::get();
+
+        $delete_individual = $_POST['delete_individual_' . $D['id']] ?? '';
+        $status_change_individual = $_POST["status_change_individual[" . $D['id'] . "]"] ?? '';
+        $accpeted_statuses = ['New', 'Current', 'Final'];
+
+        var_dump("status_change_individual[" . $D['id'] . "]", $status_change_individual);
+        
+
+        echo '
         <div>
             <form method="POST" action="">
-                <input type="Submit" name="delete" value="Delete">
-                <input type="Submit" name="change_status" value="Change Status">
+                <input type="Submit" name="delete_individual" value="Delete">
+            </form>
+            
+            <p>status_change_individual[' . $D['id'] . ']</p>
+            <form method="POST" action="">
+                <input type="Submit" name="status_change_individual_"' . $D['id'] . ' value="Change Status">
+                <input type="text" name="status_change_individual[' . $D['id'] . ']" placeholder="New">
             </form>
         </div>
-        
+        ';
+
+        if ($delete_individual) {
+            $db->query('DELETE FROM eoi WHERE id = ?', [$D['id']]);
+            return;
+        } elseif ($status_change_individual) {
+
+                $db->query('UPDATE eoi SET status = ? WHERE id = ?', [$status_change_individual, $D['id']]);
+                $D['status'] = $status_change_individual;
+
+            // if (in_array($status_change_individual, $accpeted_statuses)) {
+            //     $db->query('UPDATE eoi SET status = ? WHERE id = ?', [$status_change_individual, $D['id']]);
+            //     $D['status'] = $status_change_individual;
+            // }
+        }
+        ?>
     </details>
 </article>
 
