@@ -30,4 +30,6 @@ class Database {
 		while ($row = $result->fetchArray(SQLITE3_ASSOC)) { $rows[] = $row; }
 		return $rows ?? [];
 	}
+
+	public function last_id(): int { return $this->inner->lastInsertRowID(); }
 }

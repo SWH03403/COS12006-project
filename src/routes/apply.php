@@ -45,7 +45,22 @@ if (Request::is_post()) {
 	if (is_null(TimePlan::tryFrom($time))) { $errors[] = 'Invalid time plan'; }
 	if (!empty($errors)) { goto end_post; }
 
-	echo "good"; // DEBUG:
+	$db = Database::get();
+	$user_id = Session::user()->account()->id;
+	$job_id = $job->id;
+	$res = $db->query(
+		'INSERT INTO eoi(user_id, job_id, start_date, desired_salary, timeplan) VALUES (?, ?, ?, ?, ?)',
+		[$user_id, $job_id, $start, $salary, $time],
+	);
+	if (is_null($res)) { $errors[] = 'Failed to create a new EOI'; goto end_post; }
+	$eoi_id = $db->last_id();
+	foreach ($opts as $idx => $checked) {
+		if (!$checked) { continue; }
+		$name = "opt-" . ($idx + 1);
+		$res = $db->query('INSERT INTO eoi_accept(id, name) VALUES (?, ?)', [$eoi_id, $name]);
+		if (is_null($res)) { $errors[] = 'Failed to create a new EOI'; goto end_post; }
+	}
+	to_list('success');
 }
 end_post:
 
