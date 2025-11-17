@@ -5,7 +5,7 @@ $url = $D[2] ?? $D['url'] ?? '';
 $link = $D[3] ?? $D['link'] ?? 'Link';
 $id = $D['id'] ?? null;
 
-$id = is_null($id)? '' : " \"$id\"";
+$id = is_null($id)? '' : " id=\"$id\"";
 ?>
 <section<?= $id ?> class="box box-linked flex-y">
 	<div class="flex flex-o">

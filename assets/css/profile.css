@@ -3,7 +3,7 @@
 h2 { font-size: 20pt; }
 
 #account-container { min-width: 400px; max-width: 100%; }
-#applicant-container { min-width: 600px; max-width: 100%; }
+#applicant-info { min-width: 600px; max-width: 100%; }
 
 #no-applicant-message {
 	max-width: 600px;
