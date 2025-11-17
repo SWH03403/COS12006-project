@@ -4,6 +4,15 @@ enum Gender: string {
 	case Female = 'f';
 	case NonBinary = 'x';
 	case Other = '?';
+
+	public function label(): string {
+		return match($this) {
+			self::Male => 'male',
+			self::Female => 'female',
+			self::NonBinary => 'non-binary',
+			self::Other => '?',
+		};
+	}
 }
 
 class Applicant {
@@ -17,7 +26,7 @@ class Applicant {
 		public bool $is_veteran,
 		public string $street,
 		public string $town,
-		public string $state,
+		public State $state,
 		public string $postcode,
 		public string $phone,
 	) {}
@@ -26,23 +35,23 @@ class Applicant {
 	public static function _from_user(User $user): ?self {
 		$db = Database::get();
 		$id = $user->account()->id;
-		$rows = $db->query('SELECT * FROM user_applicant WHERE id = ?', [$id]);
-		if (is_null($rows) || empty($rows)) { return null; }
-		$row = $rows[0];
-		$dob = DateTimeImmutable::createFromFormat('Y-m-d', $row['dob']);
+		$row = $db->query('SELECT * FROM user_applicant WHERE id = ?', [$id])[0] ?? null;
+		if (is_null($row)) { return null; }
+		extract($row, EXTR_OVERWRITE); // WARN: Extract SQL row
+		$dob = DateTimeImmutable::createFromFormat('Y-m-d', $dob);
 		return new self(
-			$row['first_name'],
-			$row['last_name'],
+			$first_name,
+			$last_name,
 			$dob,
-			Gender::from($row['gender']),
-			$row['can_check_background'],
-			$row['is_convict'],
-			$row['is_veteran'],
-			$row['street'],
-			$row['town'],
-			$row['state'],
-			$row['postcode'],
-			$row['phone'],
+			Gender::from($gender),
+			$can_check_background,
+			$is_convict,
+			$is_veteran,
+			$street,
+			$town,
+			new State($state),
+			$postcode,
+			$phone,
 		);
 	}
 }

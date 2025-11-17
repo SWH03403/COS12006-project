@@ -291,6 +291,8 @@ form .input-check {
 	backdrop-filter: blur(5px); /* Blur everything behind this element */
 }
 .box-linked > :first-child {
+	margin-bottom: 5px;
+
 	h2 { font-size: 18pt; }
 	a {
 		padding: .1em .8em;
@@ -314,6 +316,19 @@ form .input-check {
 .minor { color: #aaa; }
 
 #company-logo { display: block; max-width: 300px; } /* Preserve image ratio */
+
+#applicant-info {
+	*::before { color: #888; }
+
+	> ul { padding: .1em 2em; }
+
+	.info-basic { padding: .1em 1.5em; }
+	.info-gender { margin-left: .2em; }
+	.info-dob {
+		font-weight: 500;
+		&::before { content: "Born: " }
+	}
+}
 
 @media(max-width: 700px) {
 	header, footer {

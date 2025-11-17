@@ -26,7 +26,7 @@ class State {
 			'WA'  => 'Western Australia',
 		];
 	}
-	private function __construct(private string $abbr) {}
+	public function __construct(private string $abbr) {}
 
 	public static function options(): array {
 		self::init();
@@ -43,6 +43,10 @@ class State {
 	}
 
 	public function abbr(): string { return $this->abbr; }
+	public function full(): string {
+		self::init();
+		return self::$NAMES[$this->abbr];
+	}
 
 	public function has_postcode(int $code): bool {
 		foreach (self::$ALL[$this->abbr] as $range) {
