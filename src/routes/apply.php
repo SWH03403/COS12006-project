@@ -30,7 +30,7 @@ render_page(function() use (&$job, &$errors) {
 	$salary_cur = $job->salary->currency . ' / year';
 	$exp_range = $job->experience->begin . ' ~ ' . $job->experience->end;
 	$start_date_msg = 'When are you available to start in case you are selected for employment?';
-	$affirm_msg = 'I affirm that I possess all required qualifications listed in the job description.';
+	$affirm_msg = 'I affirm that I possess all mandatory qualifications listed in the job description.';
 	render('input', 'Desired Salary', placeholder: $salary_range, suffix: $salary_cur);
 	render('input', 'Experience', placeholder: $exp_range, suffix: 'years');
 	render('input', $start_date_msg, 'start-date', type: 'date', vertical: true);
@@ -39,7 +39,12 @@ render_page(function() use (&$job, &$errors) {
 		'part' => 'Part-time',
 		'temp' => 'Temporary',
 	]);
+	echo '<h2>Qualifications</h2>';
 	render('input/check', $affirm_msg, 'affirm', required: true);
+	if (!empty($job->reqs->opts)) { echo '<h3>Optional</h3>'; }
+	foreach ($job->reqs->opts as $idx => $opt) {
+		render('input/check', $opt.'.', "affirm-opt-$idx");
+	}
 	render('input', 'Additional supporting documents (resume, certificates, e.t.c.)', 'documents',
 		type: 'file',
 		vertical: true,
