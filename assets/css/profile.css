@@ -1,9 +1,7 @@
 @import "global.css";
 
-h2 { font-size: 20pt; }
-
-#account-container { min-width: 400px; max-width: 100%; }
-#applicant-info { min-width: 600px; max-width: 100%; }
+#account-container { width: 400px; max-width: 100%; }
+#applicant-info { width: 500px; max-width: 100%; }
 
 #no-applicant-message {
 	max-width: 600px;
@@ -15,7 +13,12 @@ h2 { font-size: 20pt; }
 #account-info {
 	display: grid;
 	grid-template-columns: 150px max-content;
-	font-size: 16pt;
+	font-size: 14pt;
+
+	& > :nth-child(odd) {
+		padding-left: .4em;
+		font-weight: 500;
+	}
 }
 
 .edit-btn {
