@@ -21,7 +21,7 @@ render_page(function() use ($infos) {
         'last_name:'  => 'last_name', 
     ];
 
-    echo search_head_html('Change status: ', 'Change', $status_change, true, true, false , true);
+    echo search_head_html('Change status: ', 'Change', $status_change, true, true, false, true);
 
     if ($status_change) {
         echo '
