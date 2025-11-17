@@ -4,39 +4,6 @@
 
 #application-form { width: 400px; }
 
-/* Styling for multiple-but-limited-choice questions. */
-#application-form .input-multi {
-	label:first-child {
-		border: none;
-		margin-right: 10px;
-		border-radius: 1em;
-	}
-	/* Primary buttons used to select option. */
-	label:not(:first-child) {
-		border: var(--form-border-active);
-		background-color: white;
-		color: black;
-		font-weight: normal;
-		text-align: center;
-		border-radius: 0;
-	}
-	/* Prevent adjacent borders from becoming doubly thickened */
-	label:not(:last-child) { border-right: none; }
-	/* Round the left side of the first option (by select the label right after an input) */
-	input:first-of-type + label { border-radius: 1em 0 0 1em; }
-	/* Round the right side of the first last */
-	label:last-child { border-radius: 0 1em 1em 0; }
-
-	/* Highlight (invert colors of) the selected option */
-	&:has(:active) label:first-child, /* Fix flashing when focus is lost by the label being clicked. */
-	input:checked + label {
-		background-color: var(--select-color);
-		color: white;
-		font-weight: bold;
-	}
-	/* Hide but not disable the underlying radio inputs */
-	input { padding: 0; max-width: 0; }
-}
 /* Reduce boldness */
 label[for="input-documents"],
 label[for="input-start"] { font-weight: 500; }
