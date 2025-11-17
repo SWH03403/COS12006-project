@@ -17,9 +17,23 @@ render_page(function() use (&$job, &$errors) {
 	$applicant = Session::user()?->applicant();
 
 	echo '<div class="fill flex-y">';
-	render('boxlink', function() {
-
-	}, 'Job Info', '/jobs', 'Change');
+	render('boxlink', function() use (&$job) {
+		$name = html_sanitize($job->name);
+		echo <<<TEXT
+		<div class="info-company">$name</div>
+		<div class="flex">
+			by <span class="important space">$job->company</span>
+			<span class="fill"></span>
+			<span class="important">$job->id</span>
+		</div>
+		<div>in <span class="important space">$job->location</span></div>
+		<h3>Mandatory Qualifications</h3><ul>
+		TEXT;
+		foreach ($job->reqs->must as $name => $text) {
+			echo '<li class="info-req-' . $name . '">' . html_sanitize($text) . '</li>';
+		}
+		echo '</ul>';
+	}, 'Job Info', '/jobs', 'Change', id: 'job-info');
 	render('profile', $applicant);
 	echo '</div>';
 

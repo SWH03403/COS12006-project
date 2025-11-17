@@ -8,6 +8,18 @@
 
 #content > :first-child { gap: var(--spacing); }
 
+.info-company {
+	font-size: 18pt;
+	font-weight: 600;
+}
+.box-linked .space { margin: 0 .2em; }
+
+.info-req-langs::before { content: "Languages: "; }
+.info-req-tools::before { content: "Tools / Frameworks: "; }
+
+#job-info h3 { margin-top: var(--spacing); }
+#job-info *::before { font-weight: bold; }
+
 #application-header { margin-bottom: 50px; }
 
 #application-form {
