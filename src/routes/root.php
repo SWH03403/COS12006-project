@@ -1,6 +1,10 @@
 <?php
 render_page(function() {
-	echo <<<'TEXT'
+	$user = Session::has_user();
+	$url = $user? '/apply/edit' : '/user/signup';
+	$text = $user? 'Apply Now' : 'Sign Up Now';
+
+	echo <<<TEXT
 	<section id="website-introduction" class="flex flex-o box">
 		<img id="company-logo" src="/static/images/logos/duodie.png" alt="Company Logo">
 		<div id="company-info">
@@ -21,7 +25,7 @@ render_page(function() {
 	<section id="apply-now" class="flex-o flex-y">
 		<h2>Ready to take the next step?</h2>
 		<p>Create your profile and start applying for jobs now!</p>
-		<a href="/user/signup" class="signup-button">Signup Now</a>
+		<a href="$url" class="signup-button">$text!</a>
 	</section>
 
 	<div id="fre-asked-ques" class="flex-y flex">
